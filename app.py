@@ -82,7 +82,7 @@ def create_pdf_report(features, prediction, confidence, shap_image_path):
 
     # SHAP Image
     y_pos -= 100
-    if os.path.exists(shap_image_path):
+    if shap_image_path and os.path.exists(shap_image_path):
         try:
             c.setFont("Helvetica-Bold", 12)
             c.drawString(50, y_pos + 80, "Top 5 Contributing Features (SHAP):")
@@ -170,4 +170,6 @@ def download_report():
     )
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    import os
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
