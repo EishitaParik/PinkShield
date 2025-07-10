@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Breast Cancer Prediction</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <style>
+   body {
+      font-family: "Poppins", sans-serif;
+      background: url("{{ url_for('static', filename='hero_breast_cancer1.jpg') }}") no-repeat center center ;
+      background-size: cover;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      color: #fff;
+    } 
+
+     
+
+    .container {
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 16px;
+      max-width: 600px;
+      width: 100%;
+      padding: 2rem 3rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      color: #333;
+    }
+    h1 {
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    .hero-img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      object-fit: cover;
+      max-height: 180px;
+      box-shadow: 0 8px 20px rgba(102, 126, 234, 0.5);
+    }
+    label {
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    input.form-control {
+      border-radius: 12px;
+      padding: 1rem;
+      font-size: 1.1rem;
+      border: 2px solid #667eea;
+      transition: border-color 0.3s ease;
+    }
+    input.form-control:focus {
+      border-color: #764ba2;
+      box-shadow: 0 0 8px #764ba2;
+      outline: none;
+    }
+    button.btn-primary {
+      background: #764ba2;
+      border: none;
+      font-weight: 600;
+      border-radius: 12px;
+      padding: 1rem;
+      font-size: 1.1rem;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+    button.btn-primary:hover {
+      background: #5a347a;
+    }
+    button.btn-secondary {
+      background: #555;
+      border: none;
+      font-weight: 600;
+      border-radius: 12px;
+      padding: 1rem;
+      font-size: 1.1rem;
+      width: 100%;
+      transition: background-color 0.3s ease;
+      color: #fff;
+    }
+    button.btn-secondary:hover {
+      background: #333;
+    }
+    .result-card {
+      margin-top: 2rem;
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .result-card:hover {
+      transform: translateY(-5px);
+    }
+    .result-card.cancerous {
+      background: #ffdde1;
+      color: #b00020;
+    }
+    .result-card.not-cancerous {
+      background: #d4edda;
+      color: #155724;
+    }
+    .result-card img {
+      max-width: 100px;
+      margin-bottom: 1rem;
+    }
+    .shap-explanation {
+      background: #f9f9f9;
+      padding: 1rem;
+      margin-top: 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      color: #333;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+    @media (max-width: 576px) {
+      .container {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Breast Cancer Prediction</h1>
+    <img
+      src="{{ url_for('static', filename='hero_breast_cancer.jpg') }}"
+      alt="Breast Cancer Awareness"
+      class="hero-img"
+    />
+
+    <form id="predictForm" action="/predict" method="POST" novalidate>
+      <div class="mb-3">
+        <label for="featureInput">Enter 30 Features (comma separated)</label>
+        <input
+          type="text"
+          class="form-control"
+          id="featureInput"
+          name="feature"
+          placeholder="Example: 17.99,10.38,122.8,..."
+          value="{{ request.form.feature or '' }}"
+          required
+        />
+        <small class="form-text text-muted">
+          Please enter exactly 30 numeric values separated by commas.
+        </small>
+      </div>
+
+      <!-- 🔽 Hidden input added to pass SHAP image to /download_report -->
+      <input type="hidden" name="shap_img" value="{{ shap_img or '' }}">
+
+      <button type="submit" class="btn btn-primary w-100">Predict</button>
+
+      <!-- Download Report Button -->
+      <button
+        type="submit"
+        form="predictForm"
+        formaction="/download_report"
+        formmethod="POST"
+        class="btn btn-secondary mt-2 w-100"
+      >
+        Download Report (PDF)
+      </button>
+    </form>
+
+    {% if message %}
+    <div class="result-card {% if message[0] == 'cancerous' %}cancerous{% else %}not-cancerous{% endif %}">
+      {% if message[0] == 'cancerous' %}
+      <img src="{{ url_for('static', filename='cancer_icon1.png') }}" alt="Cancerous" />
+      <h4>Prediction: Cancerous</h4>
+      <p>Please consult a medical professional for diagnosis and treatment.</p>
+      {% else %}
+      <img src="{{ url_for('static', filename='healthy_icon1.png') }}" alt="Not Cancerous" />
+      <h4>Prediction: Not Cancerous</h4>
+      <p>Results suggest no cancer detected. Keep regular checkups.</p>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    {% if shap_img %}
+    <div class="shap-explanation">
+      <h5>Why this prediction?</h5>
+      <img
+        src="{{ url_for('static', filename=shap_img) }}"
+        alt="SHAP Explanation"
+        class="img-fluid"
+        style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);"
+      />
+      <p class="mt-2 text-muted" style="font-size: 0.9rem;">
+        Top 5 features influencing the prediction above.
+      </p>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
