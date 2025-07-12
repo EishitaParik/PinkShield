@@ -6,7 +6,7 @@ An easy-to-use web application that leverages **machine learning** to predict br
 
 ## 🌐 Live Demo
 
-👉 [Try PinkShield Now](https://your-render-deployment-link.com)
+👉 [Try PinkShield Now](https://pinkshield.onrender.com/predict)
 
 ---
 
