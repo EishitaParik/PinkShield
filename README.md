@@ -6,7 +6,7 @@ An intelligent and accessible machine learning-powered web application that pred
 
 ## 🌐 Live Demo
 
-👉 [Try PinkShield Now](https://pinkshield.onrender.com/predict)
+👉 [Try PinkShield Now](https://pinkshield.onrender.com/)
 
 ---
 
