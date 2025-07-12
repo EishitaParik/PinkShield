@@ -1,6 +1,6 @@
 # 🎀 PinkShield – Breast Cancer Prediction Web App
 
-An easy-to-use web application that leverages **machine learning** to predict breast cancer status based on user inputs. PinkShield aims to provide **accessible** and **interpretable** predictions through a simple interface, detailed results, and downloadable reports.
+An intelligent and accessible machine learning-powered web application that predicts breast cancer status based on input medical data. PinkShield offers real-time results with explanations and downloadable reports, aimed to assist early awareness and detection.
 
 ---
 
@@ -12,47 +12,64 @@ An easy-to-use web application that leverages **machine learning** to predict br
 
 ## 🧠 Overview
 
-**PinkShield** is a web-based diagnostic assistant that uses a trained ML model to help users predict the presence of breast cancer. It emphasizes **clarity**, **accuracy**, and **interpretability** for both technical and non-technical users.
+PinkShield is designed to simplify predictive diagnostics for breast cancer using a trained machine learning model. It features a **user-friendly interface**, provides **interpretable results**, and generates **detailed PDF reports** for medical consultation or personal record-keeping.
 
 ---
 
 ## ✨ Features
 
-- 📝 Input form for medical features related to breast cancer
-- ⚡ Real-time prediction using trained ML models
-- 📊 Visual explanation using **SHAP** (feature importance)
-- 📄 Generate & download PDF reports (ReportLab)
-- 💡 Simple and intuitive UI
-- 📱 Fully responsive design (Bootstrap)
+- 📝 Medical input form with key diagnostic features
+- ⚡ Instant prediction using trained ML model
+- 📊 SHAP visualizations for feature importance
+- 📄 PDF report generation with patient inputs and prediction
+- 🖥️ Clean, responsive UI (Bootstrap + HTML/CSS)
+- 🔗 Publicly deployed on Render
 
 ---
 
-## 🛠 Technology Stack
+## 🛠 Tech Stack
 
 <div align="center">
-  <img src="https://skillicons.dev/icons?i=python,flask,html,css,bootstrap" /><br/>
-  <img src="https://img.shields.io/badge/Scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" />
-  <img src="https://img.shields.io/badge/XGBoost-DC143C?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmIiB2aWV3Qm94PSIwIDAgNjQgNjQiIHhtbG5zPSJod... (icon)" />
-  <img src="https://img.shields.io/badge/SHAP-007ACC?style=for-the-badge&logo=python&logoColor=white" />
-  <img src="https://img.shields.io/badge/Render%20Deployed-36454F?style=for-the-badge&logo=render&logoColor=white" />
+  <img src="https://skillicons.dev/icons?i=python" />
+  <img src="https://skillicons.dev/icons?i=flask" />
+  <img src="https://skillicons.dev/icons?i=html,css" />
+  <img src="https://skillicons.dev/icons?i=bootstrap" />
 </div>
+
+<br/>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" />
+  <img src="https://img.shields.io/badge/XGBoost-DC143C?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/SHAP-007ACC?style=for-the-badge&logo=python&logoColor=white" />
+  <img src="https://img.shields.io/badge/Render%20Deployment-3A3A3A?style=for-the-badge&logo=render&logoColor=white" />
+</p>
+
+---
+
+## 📸 Screenshots
+
+| Input Form | Prediction Result | PDF Report |
+|------------|-------------------|------------|
+| ![](https://user-images.githubusercontent.com/yourusername/form.png) | ![](https://user-images.githubusercontent.com/yourusername/result.png) | ![](https://user-images.githubusercontent.com/yourusername/pdf-report.png) |
 
 ---
 
 ## 🚀 How to Use
 
-1. Visit the [PinkShield app](https://your-render-deployment-link.com)
-2. Fill out the form with required medical features
-3. Click **Predict** to view results and feature importance
-4. Optionally, download a PDF report for your records
+1. Go to [PinkShield](https://pinkshield.onrender.com/predict)
+2. Fill in your diagnostic information (e.g., radius mean, texture, etc.)
+3. Click **"Predict"** to get your result
+4. Optionally, click **"Download PDF"** for a detailed report
 
 ---
 
-## 🧪 Local Setup Instructions
+## 📦 Local Setup
 
 ```bash
 git clone https://github.com/yourusername/PinkShield.git
 cd PinkShield
 pip install -r requirements.txt
 python app.py
+
 
