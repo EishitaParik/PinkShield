@@ -57,7 +57,7 @@ PinkShield is designed to simplify predictive diagnostics for breast cancer usin
 
 ## 🚀 How to Use
 
-1. Go to [PinkShield](https://pinkshield.onrender.com/predict)
+1. Go to [PinkShield](https://pinkshield.onrender.com/)
 2. Fill in your diagnostic information (e.g., radius mean, texture, etc.)
 3. Click **"Predict"** to get your result
 4. Optionally, click **"Download PDF"** for a detailed report
